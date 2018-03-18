@@ -1,25 +1,77 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    </head>
-    <body>
- <form method="POST" action="rest/login">
 
-</form>
-    </body>
-    
-    
-    
- <script>
+<html>
+
+<head>
+
+<title>
+
+AngularJs $http.get() Service Response Example
+
+</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script type="text/javascript">
+
+var app = angular.module('serviceApp', []);
+
+app.controller('serviceCtrl', function ($scope, $http) {
+
+
+ $scope.submitEmployee = function() {
+         
+       var url1 =   'http://localhost:9999/mavenproject2/webapi/myresource/'+$scope.form.firstName+'/'+$scope.form.lastName;      
+                        
+                        
+$http({
+
+method: 'GET',
+
+url: url1 
+
+}).then(function success(response) {
+
+ $scope.myWelcome = response.data;
+
+
+
+}, function error(response) {
+
+});
+                    
+         
+    };
+
+
+
+
+});
 
 </script>
+
+</head>
+
+<body>
+
+<div ng-app="serviceApp" ng-controller="serviceCtrl">
+
+
+
+<form ng-submit="submitEmployee()">
+            
+                    First Name
+                    <input type="text" ng-model="form.firstName" size="60" />
+                
+                    Last Name
+                   <input type="text" ng-model="form.lastName" size="60" />
+                <input type="submit" value="Submit" />
+                    </form>
+<div ng-repeat="post in myWelcome">
+    <h2> {{post.ans}} </h2>
+</div>
+</div>
+
+</body>
+
 </html>

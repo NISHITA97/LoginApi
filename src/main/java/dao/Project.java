@@ -51,28 +51,34 @@ public class Project {
 		{
 			PreparedStatement ps = connection.prepareStatement("SELECT pass,designation from logins where userid='"+userId+"'" );
 			ResultSet rs = ps.executeQuery();
-                       
+                        int got =0;
 			while(rs.next())
 			{
 				
-                                
+                                 got=1;
                                 FeedObjects feedObject = new FeedObjects();
                                 String actualpass= rs.getString("pass");
                                 
                                 if(userpass.equals(actualpass)){
                                    
-                                    feedObject.setans("yes");
+                                    feedObject.setans("success");
                                     feedObject.setdesignation(rs.getString("designation"));
                                     feedData.add(feedObject);
                                     
                                 }else{
-                                    feedObject.setans("no");
+                                    feedObject.setans("password not match");
+                                    feedData.add(feedObject);
                                 }
                                 
                                 
                                 
 				
 			}
+                        if(got==0){
+                            FeedObjects feedObject = new FeedObjects();
+                            feedObject.setans("no record with this username");
+                            feedData.add(feedObject);
+                        }
                         
                        
 		}

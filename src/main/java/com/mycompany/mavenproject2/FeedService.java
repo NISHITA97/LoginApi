@@ -14,33 +14,10 @@ import javax.ws.rs.core.MediaType;
 @Path("myresource")
 public class FeedService {
 	
-	@GET
-	@Path("/GetFeeds")
-	@Produces("application/json")
-      public String  getIt() {
-     
-      ArrayList<FeedObjects> feedData = new ArrayList<FeedObjects>();
-      String feeds = null;
-      
-		try 
-		{
-			
-			ProjectManager projectManager= new ProjectManager();
-			//feedData = projectManager.GetFeeds();
-                        Gson gson = new Gson();
-			System.out.println(gson.toJson(feedData));
-			feeds = gson.toJson(feedData);
-                       
-			
-		} catch (Exception e)
-		{
-			System.out.println("error");
-		}
-		return feeds ;
-    }
+	
       
       @GET
-	@Path("/name={userId}/{userpass}")
+	@Path("/{userId}/{userpass}")
       @Produces("application/json")
       
       public String data(@PathParam("userId") String  userId , @PathParam("userpass") String  userpass  )
